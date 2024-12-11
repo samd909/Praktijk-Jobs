@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Post(models.Model):
     STATUS_CHOICES = (
         ('open', 'Open'),
@@ -25,17 +26,16 @@ class Post(models.Model):
     class Meta:
         ordering = ['-created_at'] 
 
-class userInfo(models.Model):    
-    firstName = models.CharField(max_length=255)
-    lastName = models.CharField(max_length=255)
-    bio = models.CharField(max_length=255)
-    kvk = models.CharField(max_length=255, default="Geen KVK")
-    location = models.CharField(max_length=255, null=True, blank=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    # Add custom fields here
+    bio = models.TextField(blank=True)
+    birth_date = models.DateField(null=True, blank=True)
 
     def __str__(self):
-        return self.user
+        return self.user.username
+
 
 
