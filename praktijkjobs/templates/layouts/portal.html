@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Klussen</title>
+    <script src="https://unpkg.com/htmx.org@1.8.1"></script>
+    <link rel="stylesheet" href="{% static 'css/scrollbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sans.css' %}">
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="relative h-screen w-screen bg-gray-100">
+
+    <div class="w-full h-full bg-gray-200">
+        <!-- Header Section -->
+        <div class="bg-white shadow-md w-full h-20 flex items-center px-6">
+            <div class="w-1/2">
+                <h1 class="text-2xl font-semibold text-gray-800">Welkom bij de KLUS portal!</h1>
+            </div>
+
+            <div class="w-1/2 flex justify-end">
+                <h1 class="text-xl font-medium text-gray-700">Ingelogd als {{ request.user }}!</h1>
+            </div>
+        </div>
+
+        <!-- Main Content Section -->
+        <div class="w-full h-[92%] flex">
+            <!-- Sidebar (10% width) -->
+            <div class="bg-white shadow-md w-[10%] h-full p-6 space-y-4">
+                <a href="#" class="block text-lg font-semibold text-gray-700 hover:text-purple-600 transition">Settings</a>
+                <a href="#" class="block text-lg font-semibold text-gray-700 hover:text-purple-600 transition">Posts</a>
+                <a href="#" class="block text-lg font-semibold text-gray-700 hover:text-purple-600 transition">More</a>
+            </div>
+
+            <!-- Main Content (90% width) -->
+            <div class="bg-gray-200 rounded-xl w-[90%] h-full flex justify-center items-center p-4">
+                <div class="bg-white w-full h-full rounded-lg overflow-auto p-6">
+                    <!-- Block Content -->
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </body>
+</html>

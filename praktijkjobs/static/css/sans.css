@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+.sans {
+    font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+  }
+
+.roboto {
+    font-family: 'Roboto', sans-serif;
+}

@@ -1,0 +1,29 @@
+{% extends 'layouts/home.html' %} {% block content %}
+<div>
+  <h2>Welkom terug!</h2>
+  <form method="POST">
+    {% csrf_token %}
+    <div>
+      <div>
+        <label for="username">Gebruikersnaam</label>
+        <input type="text" name="username" id="username" required />
+      </div>
+      <div>
+        <label for="password">Wachtwoord</label>
+        <input type="password" name="password" id="password" required />
+      </div>
+    </div>
+    <button type="submit">Login</button>
+  </form>
+  <p>
+    Nog geen account? <a href="{% url 'register' %}">Registreer hier</a>
+  </p>
+  {% if messages %}
+  <div>
+    {% for message in messages %}
+    <p>{{ message }}</p>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
