@@ -9,7 +9,11 @@ urlpatterns = [
     path('', home, name='home'),    
 
     path('dashboard/', dashboard, name="dashboard"),
-    path('settings/', settings, name="dashboard"),
+    path('settings/', settings, name="settings"),
+
+    path('update_bio/', update_bio, name='update_bio' ),
+    path('upload_profile_picture/', upload_profile_picture, name='upload_profile_picture'),
+
 
     path('login/', login_view, name='login'),
     path('register/', register_view, name='register'),

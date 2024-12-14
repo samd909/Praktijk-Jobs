@@ -32,7 +32,7 @@
         <div class="flex items-center space-x-6">
             <button class="text-gray-500 material-icons">notifications</button>
             <button class="text-gray-500 material-icons">star</button>
-            <img src="{% static 'images/chug.jpg' %}" alt="User" class="w-12 h-12 rounded-full">
+            <img src="/media/{{ request.user.profile.profile_picture }}" alt="User" class="w-12 h-12 rounded-full">
         </div>
     </div>
 </header>

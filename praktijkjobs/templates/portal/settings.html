@@ -1,36 +1,54 @@
 {% extends 'layouts/portal.html' %} {% block content %}
 <div class="flex gap-6">
-    <div class="bg-gray-800 text-gray-300 p-8 w-1/2 rounded-lg shadow border border-gray-700">
-        <h2 class="text-2xl font-semibold text-center mb-6">Update Your Profile</h2>
-        <form method="POST">
-            {% csrf_token %}
-            
-            <div class="mb-4">
-                <label for="bio" class="block text-sm font-medium text-gray-300">Bio</label>
-                <textarea id="bio" name="bio" class="bg-gray-600 w-full p-2 rounded-lg" rows="4">{{ user.profile.bio }}</textarea>
-            </div>
-            
-            <div class="mb-4">
-                <label for="birth_date" class="block text-sm font-medium text-gray-300">Birth Date</label>
-                <input type="date" id="birth_date" name="birth_date" value="{{ user.profile.birth_date|date:'Y-m-d' }}" class="bg-gray-600 w-full p-2 rounded-lg">
-            </div>
+    <div class="bg-gray-800 text-white p-8 w-1/2 rounded-lg shadow border border-gray-700">
+        <div class="flex">
+            <img class="mb-4 rounded-lg w-28 h-28 sm:mb-0 xl:mb-4 2xl:mb-0" src="/media/{{ request.user.profile.profile_picture }}">
+            <div class="ml-6">
+                <h2 class="text-2xl font-semibold text-center mb-6 ">Profile Picture</h2>
+                <div class="mb-4">
+                      <form method="POST" action="{% url 'upload_profile_picture' %}" enctype="multipart/form-data ">
+                        {% csrf_token %}
+                        
+                        <label for="file-upload" class="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer hover:bg-blue-600">
+                            Upload
+                          </label>
+                          <input type="file" id="file-upload" class="hidden">
+                    
+                        <button type="submit" class="bg-green-500 ml-6 text-white px-4 py-2 rounded cursor-pointer hover:bg-green-600 flex">
+                            <span class="material-icons">upload_file</span>
+                            <span>Save</span>
+                        </button>
+           
+                        
 
-            <div class="flex justify-center">
-                <button type="submit" class="px-6 py-2 bg-blue-500 text-gray-300 rounded-lg">Update Profile</button>
+                    </form>
+                </div>
             </div>
-        </form>
+        </div>
+
+
+
+    
+        {% comment %} <form method="POST" action="{% url 'upload_profile_picture' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="profile_picture">Upload Profile Picture:</label><br>
+            <input type="file" id="profile_picture" name="profile_picture" accept="image/*"><br><br>
+            <button type="submit">Upload</button>
+        </form> {% endcomment %}
     </div>
 
     <div class="bg-gray-800 text-gray-300 p-8 w-1/2 rounded-lg shadow">
         <h2 class="text-2xl font-semibold text-center mb-6">Update Your Profile</h2>
-        <form method="POST">
+        <h2 class="text-2xl font-semibold text-center mb-6">Bio: {{ bioData }}</h2>
+
+        <form method="POST" action="{% url 'update_bio' %}">
             {% csrf_token %}
             
             <div class="mb-4">
                 <label for="bio" class="block text-sm font-medium text-gray-300">Bio</label>
-                <textarea id="bio" name="bio" class="bg-gray-600 w-full p-2 rounded-lg" rows="4">{{ user.profile.bio }}</textarea>
+                <textarea id="bio" name="bio" class="bg-gray-600 w-full p-2 rounded-lg" rows="4">{{ user.profile.profile_picture }}</textarea>
             </div>
-            
+
             <div class="mb-4">
                 <label for="birth_date" class="block text-sm font-medium text-gray-300">Birth Date</label>
                 <input type="date" id="birth_date" name="birth_date" value="{{ user.profile.birth_date|date:'Y-m-d' }}" class="bg-gray-600 w-full p-2 rounded-lg">
