@@ -1,78 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50 font-sans">
-    <div class="flex flex-col min-h-screen">
-        <!-- Topbar -->
-        <header class="bg-white px-6 py-4 border-b w-full">
-            <div class="flex items-center justify-between">
-
-                <div class="flex items-center">
-                    <h1 class="text-2xl font-bold text-blue-500">Flowbite</h1>
-
-                    <div class="relative w-96 ml-48">
-                        <input type="text" placeholder="Search" class="border rounded-lg px-4 py-3 w-full pl-10">
-                        <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 material-icons">search</span>
-                    </div>
-
-                </div>
-
-                <div class="flex items-center space-x-6">
-                    <button class="text-gray-500 material-icons">notifications</button>
-                    <button class="text-gray-500 material-icons">star</button>
-                    <img src="https://via.placeholder.com/48" alt="User" class="w-12 h-12 rounded-full">
-                </div>
-            </div>
-        </header>
-
-        <div class="flex flex-1">
-            <!-- Sidebar -->
-            <aside class="w-72 bg-white border-r">
-                <nav class="mt-6">
-                    <ul>
-                        <li class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100">
-                            <span class="material-icons">dashboard</span>
-                            <span class="ml-3 text-lg">Dashboard</span>
-                        </li>
-                        <li class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100">
-                            <span class="material-icons">view_quilt</span>
-                            <span class="ml-3 text-lg">Layouts</span>
-                        </li>
-                        <li class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100">
-                            <span class="material-icons">table_chart</span>
-                            <span class="ml-3 text-lg">CRUD</span>
-                        </li>
-                        <li class="flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100">
-                            <span class="material-icons">settings</span>
-                            <span class="ml-3 text-lg">Settings</span>
-                        </li>
-                    </ul>
-                </nav>
-            </aside>
-
-            <!-- Main Content -->
-            <div class="flex-1">
-                <!-- Main Content Area -->
-                <main class="p-8">
-                    <div class="bg-white p-8 rounded-lg shadow">
-                        <h2 class="text-2xl font-bold">Main Content</h2>
-                        <p class="text-gray-500">This is the main content area.</p>
-                    </div>
-                </main>
-            </div>
-        </div>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="w-full max-w-md bg-white rounded-lg shadow-md p-6">
+    <div class="flex justify-center mb-6">
+      <img src="https://flowbite.com/docs/images/logo.svg" alt="Flowbite Logo" class="h-10">
     </div>
+    <h2 class="text-2xl font-bold text-gray-900 text-center mb-6">Sign in to platform</h2>
+    <form>
+      <div class="mb-4">
+        <label for="email" class="block text-sm font-medium text-gray-700">Your email</label>
+        <input type="email" id="email" placeholder="name@company.com" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+      </div>
+      <div class="mb-4">
+        <label for="password" class="block text-sm font-medium text-gray-700">Your password</label>
+        <input type="password" id="password" placeholder="••••••••" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+      </div>
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center">
+          <input id="remember" type="checkbox" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+          <label for="remember" class="ml-2 block text-sm text-gray-900">Remember me</label>
+        </div>
+        <a href="#" class="text-sm text-blue-600 hover:underline">Lost Password?</a>
+      </div>
+      <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none">
+        Login to your account
+      </button>
+    </form>
+    <p class="mt-6 text-sm text-center text-gray-500">
+      Not registered? <a href="#" class="text-blue-600 hover:underline">Create account</a>
+    </p>
+  </div>
 </body>
 </html>

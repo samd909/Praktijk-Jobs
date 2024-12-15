@@ -29,6 +29,14 @@ def update_bio(request):
             bio = request.POST.get('bio')
             birth_date = request.POST.get('birth_date')
 
+            first_name = request.POST.get('first_name')
+            last_name = request.POST.get('last_name')
+
+            if first_name is not None:
+                user.first_name  = first_name
+                user.last_name = last_name
+                user.save()
+                
             if bio is not None:
                 profile.bio = bio
                 profile.birth_date = birth_date

@@ -5,35 +5,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Klussen</title>
-    <script src="https://unpkg.com/htmx.org@1.8.1"></script>
     <link rel="stylesheet" href="{% static 'css/scrollbar.css' %}">
     <link rel="stylesheet" href="{% static 'css/sans.css' %}">
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body class="relative bg-green-50 h-screen w-screen">
+  <body class="relative h-screen w-screen">
 
 
-    {% comment %} HEADER {% endcomment %}
-    <div class="bg-green-600 w-[100%] h-[5%] shadow-md flex">
-      <div class="bg-transparent items-center flex p-2 w-[50%] h-[100%]">
-        <h1 class="text-2xl text-white font-bold roboto">KLUS</h1>
-      </div>
-      <div class="bg-transparent w-[50%] p-2 h-[100%]">
-        {% comment %} <h1 class="text-2xl text-right text-green-800">Ingelogd als: {{ request.user }}</h1> {% endcomment %}
-      </div>
-    </div>
-
-
-    {% comment %} MAIN CONTENT {% endcomment %}
-    <div class="bg-transparent w-[100%] h-[85%] overflow-auto p-2">
+    <div class="bg-gray-100 w-[100%] h-[100%] justify-center items-center overflow-auto p-2 flex">
       {% block content %}{% endblock %}
     </div>
 
-    {% comment %} FOOTER {% endcomment %}
-    <div class="bg-transparent w-[100%] h-[10%]">
-      
-    </div>
 
 
 
