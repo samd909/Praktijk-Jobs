@@ -11,84 +11,83 @@
 </head>
 <body class="bg-gray-100 font-sans">
 
-    <div class="flex flex-col min-h-screen">
+    <div class="flex flex-col h-screen">
 
-<!-- Topbar -->
-<header class="bg-white px-6 py-4 border-b border-gray-200 w-full fixed top-0 left-0 z-20">
-    <div class="flex items-center justify-between">
-        <div class="flex items-center">
-
-            <span class="material-symbols-outlined material-icons text-black">
-                settings_accessibility
-            </span>
-            <h1 class="text-2xl ml-2 font-bold text-black">PraktijkJobs</h1>
-
-            <div class="relative w-96 ml-28">
-                <input type="text" placeholder="Search" class="border border-gray-300 bg-gray-200 text-gray-800 rounded-lg px-4 py-3 w-full pl-10 placeholder-gray-400">
-                <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 material-icons">search</span>
-            </div>
-        </div>
-
-        <div class="flex items-center space-x-6">
-            <button class="text-gray-500 material-icons">notifications</button>
-            <button class="text-gray-500 material-icons">star</button>
-            <img src="/media/{{ request.user.profile.profile_picture }}" alt="User" class="w-12 h-12 rounded-full">
-        </div>
-    </div>
-</header>
-
-<div class="flex flex-1 pt-16">
-
-    <!-- Sidebar -->
-    <aside class="bg-white border-r border-gray-200 p-2 fixed top-0 left-0 bottom-0 w-72 z-10">
-
-        <!-- Navigation -->
-        <nav class="mt-28">
-            <ul>
-                <a href="/dashboard/" class="flex items-center px-6 py-3 text-gray-900 hover:bg-gray-200 hover:text-black rounded-lg">
-                    <span class="material-icons">dashboard</span>
-                    <span class="ml-3 text-lg">Dashboard</span>
-                </a>
-                <a class="flex items-center px-6 py-3 text-gray-900 hover:bg-gray-200 hover:text-black rounded-lg">
-                    <span class="material-icons">view_quilt</span>
-                    <span class="ml-3 text-lg">Layouts</span>
-                </a>
-                <a class="flex items-center px-6 py-3 text-gray-900 hover:bg-gray-200 hover:text-black rounded-lg">
-                    <span class="material-icons">table_chart</span>
-                    <span class="ml-3 text-lg">CRUD</span>
-                </a>
-                <a href="/settings/" class="flex items-center px-6 py-3 text-gray-900 hover:bg-gray-200 hover:text-black rounded-lg">
-                    <span class="material-icons">settings</span>
-                    <span class="ml-3 text-lg">Settings</span>
-                </a>
-            </ul>
-        </nav>
-        <div class="w-full h-[65%] justify-center  items-end flex">
-            <div class="w-[100%] h-[10%] flex border-t border-gray-300 justify-center ">
-                <div class="w-[50%] h-full flex justify-between  items-center">
-                    <span class="material-symbols-outlined material-icons text-black">
-                        settings
-                    </span>
-                    <span class="material-symbols-outlined material-icons text-black">
-                        home
-                    </span>
-                    <span class="material-symbols-outlined material-icons text-black">
-                        apps
-                    </span>
+        <!-- Topbar -->
+        <header class="bg-white px-4 md:px-6 py-2 border-b border-gray-200 w-full h-[10%]">
+            <div class="flex items-center justify-between h-full">
+                <div class="flex items-center">
+                    <!-- Sidebar toggle button -->
+                    <button id="menu-toggle" class="text-gray-700 p-3 md:hidden">
+                        <span class="material-icons">menu</span>
+                    </button>
+                    <span class="material-icons text-black hidden md:block">settings_accessibility</span>
+                    <h1 class="text-lg md:text-2xl ml-2 font-bold text-black">PraktijkJobs</h1>
+                    <!-- Search Input -->
+                    <div class="relative hidden md:block w-48 lg:w-96 ml-6 lg:ml-28">
+                        <input type="text" placeholder="Search" class="border border-gray-300 bg-gray-200 text-gray-800 rounded-lg px-4 py-2 w-full pl-10 placeholder-gray-400">
+                        <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 material-icons">search</span>
+                    </div>
+                </div>
+    
+                <div class="flex items-center space-x-4 sm:space-x-6">
+                    <button class="text-gray-500 material-icons">notifications</button>
+                    <button class="text-gray-500 material-icons">star</button>
+                    <img src="/media/{{ request.user.profile.profile_picture }}" alt="User" class="w-8 h-8 sm:w-12 sm:h-12 rounded-full">
                 </div>
             </div>
-        </div>
-    </aside>
+        </header>
+    
+        <!-- Main Content Area -->
+        <div class="flex flex-1">
 
-
+            <!-- Sidebar -->
+            <aside id="sidebar" class="bg-white border-r border-gray-200 p-2 w-56 md:w-64 lg:w-72 fixed md:relative inset-y-0 left-0 transform -translate-x-full md:translate-x-0 transition-transform duration-300 z-20">
+                <div class="flex items-center md:hidden p-4 border-b border-gray-200">
+                    <span class="material-icons text-black">settings_accessibility</span>
+                    <h1 class="text-lg ml-2 font-bold text-black">PraktijkJobs</h1>
+                </div>
+                <nav class="">
+                    <ul>
+                        <a href="/dashboard/" class="flex items-center px-4 md:px-6 py-3 text-gray-900 hover:bg-gray-200 hover:text-black rounded-lg">
+                            <span class="material-icons">dashboard</span>
+                            <span class="ml-2 md:ml-3 text-sm md:text-lg">Dashboard</span>
+                        </a>
+                        <a class="flex items-center px-4 md:px-6 py-3 text-gray-900 hover:bg-gray-200 hover:text-black rounded-lg">
+                            <span class="material-icons">view_quilt</span>
+                            <span class="ml-2 md:ml-3 text-sm md:text-lg">Layouts</span>
+                        </a>
+                        <a class="flex items-center px-4 md:px-6 py-3 text-gray-900 hover:bg-gray-200 hover:text-black rounded-lg">
+                            <span class="material-icons">table_chart</span>
+                            <span class="ml-2 md:ml-3 text-sm md:text-lg">CRUD</span>
+                        </a>
+                        <a href="/settings/" class="flex items-center px-4 md:px-6 py-3 text-gray-900 hover:bg-gray-200 hover:text-black rounded-lg">
+                            <span class="material-icons">settings</span>
+                            <span class="ml-2 md:ml-3 text-sm md:text-lg">Settings</span>
+                        </a>
+                    </ul>
+                </nav>
+            </aside>
+    
             <!-- Main Content -->
-            <div class="flex-1 ml-72 pt-8 overflow-y-auto">                
-                <main class="px-6">
-                    {% block content %}{% endblock %}
-                </main>
-            </div>
+            <main id="main-content" class="flex-1 bg-gray-100 p-4 overflow-y-auto transition-all duration-300 ml-0">
+                {% block content %}{% endblock %}
+            </main>
         </div>
     </div>
 
+    <!-- Script to toggle sidebar -->
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('main-content');
+
+        // Toggle sidebar visibility
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full'); // Hide sidebar
+            mainContent.classList.toggle('ml-0'); // Remove margin when sidebar is hidden
+            mainContent.classList.toggle('ml-64'); // Add margin when sidebar is shown
+        });
+    </script>
 </body>
 </html>
