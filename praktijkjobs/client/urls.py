@@ -6,7 +6,7 @@ from .views.dashboard import *
 from .views.settings import *
 
 urlpatterns = [
-    path('', home, name='home'),    
+    path('', dashboard, name='home'),    
 
     path('dashboard/', dashboard, name="dashboard"),
     path('settings/', settings, name="settings"),
