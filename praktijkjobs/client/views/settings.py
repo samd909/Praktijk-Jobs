@@ -32,12 +32,19 @@ def update_bio(request):
             first_name = request.POST.get('first_name')
             last_name = request.POST.get('last_name')
 
+            pc = request.POST.get('pc')
+            city = request.POST.get('city')
+            street = request.POST.get('street')
+
             if first_name is not None:
                 user.first_name  = first_name
                 user.last_name = last_name
                 user.save()
                 
             if bio is not None:
+                profile.pc = pc
+                profile.street = street
+                profile.city = city
                 profile.bio = bio
                 profile.birth_date = birth_date
                 profile.save() 
@@ -70,3 +77,25 @@ def upload_profile_picture(request):
             return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
 
     return JsonResponse({'status': 'error', 'message': 'No file uploaded or invalid request method.'}, status=400)  
+
+@login_required
+def update_aanbieder(request):
+    if request.method == "POST":
+        user = request.user
+        try:
+            profile = user.profile
+            kvk = request.POST.get('kvk')
+                
+            if kvk is not None:
+                profile.kvk = kvk
+     
+                profile.save() 
+
+                return redirect('settings')
+            else:
+                return redirect({'status': 'error', 'message': 'No bio provided.'}, status=400)
+        
+        except Profile.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'Profile does not exist.'}, status=404)
+    
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method.'}, status=405)

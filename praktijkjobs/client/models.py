@@ -31,9 +31,17 @@ class Post(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     # Add custom fields here
+    permission = models.IntegerField(default=1)
     bio = models.TextField(blank=True)
     birth_date = models.DateField(null=True, blank=True)
     profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
+
+    kvk = models.CharField(max_length=50, default="Geen KVK")
+    city = models.CharField(max_length=50, blank=True, null=True)
+    
+    pc = models.CharField(max_length=10, blank=True)
+    street = models.CharField(max_length=100, blank=True)
+
 
 
     def __str__(self):

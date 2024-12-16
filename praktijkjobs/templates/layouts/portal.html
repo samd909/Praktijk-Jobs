@@ -53,14 +53,12 @@
                             <span class="material-icons">dashboard</span>
                             <span class="ml-2 md:ml-3 text-sm md:text-lg">Dashboard</span>
                         </a>
-                        <a class="flex items-center px-4 md:px-6 py-3 text-gray-900 hover:bg-gray-200 hover:text-black rounded-lg">
-                            <span class="material-icons">view_quilt</span>
-                            <span class="ml-2 md:ml-3 text-sm md:text-lg">Layouts</span>
+                        {% if request.user.profile.permission == 1 %}
+                        <a href="/setup/" class="flex items-center px-4 md:px-6 py-3 text-gray-900 hover:bg-gray-200 hover:text-black rounded-lg">
+                            <span class="material-icons">check_circle</span>
+                            <span class="ml-2 md:ml-3 text-sm md:text-lg">Setup</span>
                         </a>
-                        <a class="flex items-center px-4 md:px-6 py-3 text-gray-900 hover:bg-gray-200 hover:text-black rounded-lg">
-                            <span class="material-icons">table_chart</span>
-                            <span class="ml-2 md:ml-3 text-sm md:text-lg">CRUD</span>
-                        </a>
+                        {% endif %}
                         <a href="/settings/" class="flex items-center px-4 md:px-6 py-3 text-gray-900 hover:bg-gray-200 hover:text-black rounded-lg">
                             <span class="material-icons">settings</span>
                             <span class="ml-2 md:ml-3 text-sm md:text-lg">Settings</span>

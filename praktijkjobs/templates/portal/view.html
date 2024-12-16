@@ -1,0 +1,142 @@
+{% extends 'layouts/portal.html' %}
+
+{% block content %}
+<div class="text-gray-800 flex items-center gap-2 mb-4">
+    <span class="material-icons">home</span>
+    <p>Home / Dashboard / {{ post.title }}</p>
+</div>
+
+<h2 class="text-xl sm:text-2xl md:text-4xl font-bold mb-6">Post Details: {{ post.title }}</h2>
+
+<div class="w-full h-[85%] flex flex-col sm:flex-row justify-between gap-6">
+    <!-- Post Information Section -->
+
+    {% if request.user.id == post.author.id %}
+    <div class="w-full sm:w-[70%] h-auto bg-white shadow-md border border-gray-300 p-8 rounded-lg">
+        <h2 class="text-3xl font-bold text-black mb-4">{{ post.title }}</h2>
+        
+        <div class="space-y-4">
+            <form method="POST" action="{% url 'update_post' post.id %}">
+                {% csrf_token %}
+    
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <label for="title" class="block text-sm font-medium">Titel</label>
+                        <input type="text" id="title" name="title" 
+                               value="{{ post.title }}" 
+                               class="bg-gray-50 border border-gray-200 w-full p-2 rounded-lg">
+                    </div>
+                    <div>
+                        <label for="budget" class="block text-sm font-medium">Budget</label>
+                        <input type="text" id="budget" name="budget" 
+                               value="{{ post.budget }}" 
+                               class="bg-gray-50 border border-gray-200 w-full p-2 rounded-lg">
+                    </div>
+                    <div>
+                        <label for="deadline" class="block text-sm font-medium">Deadline</label>
+                        <input type="date" id="deadline" name="deadline" 
+                               value="{{ post.deadline|date:'Y-m-d' }}" 
+                               class="bg-gray-50 border border-gray-200 w-full p-2 rounded-lg">
+                    </div>
+                    <div>
+                        <label for="location" class="block text-sm font-medium">Omgeving</label>
+                        <input type="text" id="location" name="location" 
+                               value="{{ post.location }}" 
+                               class="bg-gray-50 border border-gray-200 w-full p-2 rounded-lg">
+                    </div>
+                    <div class="sm:col-span-2"> 
+                        <label for="description" class="block text-sm font-medium">Omschrijving</label>
+                        <textarea id="description" name="description" 
+                                  class="bg-gray-50 border border-gray-200 text-black w-full p-2 rounded-lg h-32"> 
+                                  {{ post.description }}
+
+                        </textarea>
+                    </div>
+                </div>
+    
+                <div class="mt-6">
+                    <button type="submit" 
+                            class="px-6 py-2 bg-blue-500 font-bold text-white rounded-lg hover:bg-blue-600">
+                        Opslaan
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Additional Section (Optional) -->
+    <div class="w-full sm:w-[25%] h-auto bg-white shadow-md border border-gray-300 p-6 rounded-lg">
+        <h3 class="text-xl font-bold text-black mb-4">Manage Post</h3>
+        
+        <!-- Form to change status -->
+        <form method="POST" action="{% url 'update_status' post.id %}">
+            {% csrf_token %}
+            
+            <div class="mb-4">
+                <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+                <select id="status" name="status" class="bg-gray-50 border border-gray-200 w-full p-2 rounded-lg">
+                    <option value="Open" {% if post.status == 'Open' %}selected{% endif %}>Open</option>
+                    <option value="Closed" {% if post.status == 'Closed' %}selected{% endif %}>Closed</option>
+                </select>
+            </div>
+            
+            <div class="flex justify-between gap-4">
+                <button type="submit" class="text-center bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-all mb-4 w-full">
+                    Save Status
+                </button>
+            </div>
+        </form>
+
+        <!-- Edit and Delete Buttons (Optional) -->
+        <div class="mt-4">
+            <a href="" class="block text-center bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-all mb-4">
+                Edit Post
+            </a>
+            <a href="" class="block text-center bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition-all">
+                Delete Post
+            </a>
+        </div>
+    </div>
+
+
+    {% elif request.user.id != post.author.id %}
+    <div class="w-full sm:w-[100%] h-auto bg-white shadow-md border border-gray-300 p-8 rounded-lg">
+        <h2 class="text-3xl font-bold text-black mb-4">{{ post.title }}</h2>
+        
+        <div class="space-y-4">
+            <div>
+                <h3 class="text-lg font-semibold text-gray-800">Description</h3>
+                <p class="text-gray-700">{{ post.description }}</p>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold text-gray-800">Deadline</h3>
+                <p class="text-gray-700">{{ post.deadline }}</p>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold text-gray-800">Budget</h3>
+                <p class="text-gray-700">{{ post.budget }}</p>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold text-gray-800">Author</h3>
+                <p class="text-gray-700">{{ post.author.username }}</p>  <!-- Assuming 'author' is a ForeignKey to User model -->
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold text-gray-800">Status</h3>
+                <p class="text-gray-700">{{ post.status }}</p>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold text-gray-800">Location</h3>
+                <p class="text-gray-700">{{ post.location }}</p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}

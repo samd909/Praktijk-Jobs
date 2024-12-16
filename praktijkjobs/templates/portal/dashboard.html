@@ -1,8 +1,82 @@
-{% extends 'layouts/portal.html' %} {% block content %}
+{% extends 'layouts/portal.html' %}
+{% block content %}
+<div class="text-gray-800 flex items-center gap-2 mb-4">
+    <span class="material-icons">home</span>
+    <p>Home / Dashboard</p>
+</div>
+<h2 class="text-xl sm:text-2xl md:text-4xl font-bold mb-6">Dashboard</h2>
 
-<div class="bg-white p-8 text-black rounded-lg shadow">
-    <p class="font-bold text-2xl">Fucking Poggers</p>
+<div class="w-full h-[85%] flex flex-col sm:flex-row justify-between gap-6">
 
+    <!-- Left column: "Jou verzoeken" -->
+    <div class="bg-white w-full sm:w-[70%] h-full p-8 text-black border border-gray-300 rounded-lg shadow-md">
+        <div class="w-full h-[20%] relative">
+            <h2 class="text-2xl font-bold text-black mb-4">Jou verzoeken:</h2>
+            {% for post in posts %}
+            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 mb-6 hover:shadow-xl transition-all duration-300">
+                <h3 class="text-2xl font-semibold text-black mb-3">{{ post.title }}</h3>
+                <p class="text-sm text-gray-700 mb-4">{{ post.description }}</p>
+                <div class="flex justify-between items-center">
+                    <!-- Manage Button -->
+                    <a href="{% url 'view_post' post.id %}" class="px-6 py-2 bg-blue-500 text-white font-bold text-sm rounded-lg hover:bg-blue-600 transition-colors">
+                        Manage
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+
+    <!-- Right column: "Maak een nieuw verzoek" -->
+    <div class="bg-white w-full sm:w-[25%] h-full p-8 text-black rounded-lg shadow-md border border-gray-300">
+        <div class="w-full h-[20%] relative">
+            <h2 class="text-2xl font-bold text-black mb-4">Maak een nieuw verzoek:</h2>
+            <form method="POST" action="{% url 'create_post' %}">
+                {% csrf_token %}
+    
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <label for="title" class="block text-sm font-medium">Titel</label>
+                        <input type="text" id="title" name="title" 
+                               value="" 
+                               class="bg-gray-50 border border-gray-200 w-full p-2 rounded-lg">
+                    </div>
+                    <div>
+                        <label for="budget" class="block text-sm font-medium">Budget</label>
+                        <input type="text" id="budget" name="budget" 
+                               value="" 
+                               class="bg-gray-50 border border-gray-200 w-full p-2 rounded-lg">
+                    </div>
+                    <div>
+                        <label for="deadline" class="block text-sm font-medium">Deadline</label>
+                        <input type="date" id="deadline" name="deadline" 
+                               value="" 
+                               class="bg-gray-50 border border-gray-200 w-full p-2 rounded-lg">
+                    </div>
+                    <div>
+                        <label for="location" class="block text-sm font-medium">Omgeving</label>
+                        <input type="text" id="location" name="location" 
+                               value="" 
+                               class="bg-gray-50 border border-gray-200 w-full p-2 rounded-lg">
+                    </div>
+                    <div class="sm:col-span-2"> 
+                        <label for="description" class="block text-sm font-medium">Omschrijving</label>
+                        <textarea id="description" name="description" 
+                                  class="bg-gray-50 border border-gray-200 w-full p-2 rounded-lg h-32"> 
+                        </textarea>
+                    </div>
+                </div>
+    
+                <div class="mt-6">
+                    <button type="submit" 
+                            class="px-6 py-2 bg-blue-500 font-bold text-white rounded-lg hover:bg-blue-600">
+                        Opslaan
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 
 </div>
+
 {% endblock %}
