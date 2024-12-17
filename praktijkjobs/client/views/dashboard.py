@@ -51,29 +51,17 @@ def update_post(request, post_id):
         return redirect('dashboard')  
 
     if request.method == "POST":
-        title = request.POST.get('title')
-        description = request.POST.get('description')
+        post.title = request.POST.get('title')
+        post.description = request.POST.get('description')
+        post.budget = request.POST.get('budget')
+        post.status = request.POST.get('status')
+        post.save()  
 
-        if title and description:
-            post.title = title
-            post.description = description
-            post.save()  
+        return redirect('dashboard')  
 
-            return redirect('dashboard')  
     return redirect('dashboard')
 
 @login_required
-def update_status(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
-
-    if request.method == 'POST':
-        new_status = request.POST.get('status')
-        post.status = new_status
-        post.save()
-
-        return redirect('dashboard')  
-    return redirect('dashboard')
-
 def view_post(request, id):
     template = 'portal/view.html'
     post = get_object_or_404(Post, id=id)

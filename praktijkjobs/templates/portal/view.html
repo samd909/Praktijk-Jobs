@@ -12,7 +12,7 @@
     <!-- Post Information Section -->
 
     {% if request.user.id == post.author.id %}
-    <div class="w-full sm:w-[70%] h-auto bg-white shadow-md border border-gray-300 p-8 rounded-lg">
+    <div class="w-full sm:w-[100%] h-auto bg-white shadow-md border border-gray-300 p-8 rounded-lg">
         <h2 class="text-3xl font-bold text-black mb-4">{{ post.title }}</h2>
         
         <div class="space-y-4">
@@ -44,14 +44,22 @@
                                value="{{ post.location }}" 
                                class="bg-gray-50 border border-gray-200 w-full p-2 rounded-lg">
                     </div>
+                    <div>
+                        <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+                        <select id="status" name="status" class="bg-gray-50 border border-gray-200 w-full p-2 rounded-lg">
+                            <option value="open" {% if post.status == 'Open' %}selected{% endif %}>Open</option>
+                            <option value="closed" {% if post.status == 'Closed' %}selected{% endif %}>Closed</option>
+                        </select>
+                    </div>
                     <div class="sm:col-span-2"> 
                         <label for="description" class="block text-sm font-medium">Omschrijving</label>
                         <textarea id="description" name="description" 
-                                  class="bg-gray-50 border border-gray-200 text-black w-full p-2 rounded-lg h-32"> 
+                                  class="bg-gray-50 border border-gray-200  text-black w-full p-2 rounded-lg h-32"> 
                                   {{ post.description }}
-
                         </textarea>
                     </div>
+
+
                 </div>
     
                 <div class="mt-6">
@@ -62,41 +70,11 @@
                 </div>
             </form>
         </div>
+
     </div>
 
     <!-- Additional Section (Optional) -->
-    <div class="w-full sm:w-[25%] h-auto bg-white shadow-md border border-gray-300 p-6 rounded-lg">
-        <h3 class="text-xl font-bold text-black mb-4">Manage Post</h3>
-        
-        <!-- Form to change status -->
-        <form method="POST" action="{% url 'update_status' post.id %}">
-            {% csrf_token %}
-            
-            <div class="mb-4">
-                <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
-                <select id="status" name="status" class="bg-gray-50 border border-gray-200 w-full p-2 rounded-lg">
-                    <option value="Open" {% if post.status == 'Open' %}selected{% endif %}>Open</option>
-                    <option value="Closed" {% if post.status == 'Closed' %}selected{% endif %}>Closed</option>
-                </select>
-            </div>
-            
-            <div class="flex justify-between gap-4">
-                <button type="submit" class="text-center bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-all mb-4 w-full">
-                    Save Status
-                </button>
-            </div>
-        </form>
-
-        <!-- Edit and Delete Buttons (Optional) -->
-        <div class="mt-4">
-            <a href="" class="block text-center bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-all mb-4">
-                Edit Post
-            </a>
-            <a href="" class="block text-center bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition-all">
-                Delete Post
-            </a>
-        </div>
-    </div>
+ 
 
 
     {% elif request.user.id != post.author.id %}

@@ -16,7 +16,6 @@ urlpatterns = [
 
     path('dashboard/view/<int:id>/', view_post, name='view_post'),
 
-    path('dashboard/status/<int:post_id>/', update_status, name='update_status'),
     path('dashboard/edit/<int:post_id>/', update_post, name='update_post'),
     path('create_post/', create_post, name="create_post"),
     path('set_role', set_role, name="set_role"),
