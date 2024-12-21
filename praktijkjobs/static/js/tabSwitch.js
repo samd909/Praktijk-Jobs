@@ -1,25 +1,16 @@
-       // JavaScript for tab switching
-       const openTab = document.getElementById('openTab');
-       const closedTab = document.getElementById('closedTab');
-       const openPosts = document.getElementById('openPosts');
-       const closedPosts = document.getElementById('closedPosts');
+function showTab(tabId, activeButtonId) {
+    // Hide all tab contents
+    document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
 
-       openTab.addEventListener('click', () => {
-           openTab.classList.add('text-blue-500', 'border-blue-500');
-           openTab.classList.remove('text-gray-500');
-           closedTab.classList.remove('text-blue-500', 'border-blue-500');
-           closedTab.classList.add('text-gray-500');
+    // Remove active styles from buttons
+    document.querySelectorAll('.border-b-2').forEach(button => {
+        button.classList.remove('border-blue-500', 'text-blue-500');
+        button.classList.add('text-gray-500');
+    });
 
-           openPosts.classList.remove('hidden');
-           closedPosts.classList.add('hidden');
-       });
+    // Show the selected tab
+    document.getElementById(tabId).classList.remove('hidden');
 
-       closedTab.addEventListener('click', () => {
-           closedTab.classList.add('text-blue-500', 'border-blue-500');
-           closedTab.classList.remove('text-gray-500');
-           openTab.classList.remove('text-blue-500', 'border-blue-500');
-           openTab.classList.add('text-gray-500');
-
-           closedPosts.classList.remove('hidden');
-           openPosts.classList.add('hidden');
-       });
+    // Add active styles to the selected button
+    document.getElementById(activeButtonId).classList.add('border-blue-500', 'text-blue-500');
+}

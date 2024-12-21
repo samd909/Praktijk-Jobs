@@ -53,6 +53,10 @@
                             <span class="material-icons">dashboard</span>
                             <span class="ml-2 md:ml-3 text-sm md:text-lg">Dashboard</span>
                         </a>
+                        <a href="/discovery/" class="flex items-center px-4 md:px-6 py-3 text-gray-900 hover:bg-gray-200 hover:text-black rounded-lg">
+                            <span class="material-icons">search</span>
+                            <span class="ml-2 md:ml-3 text-sm md:text-lg">Verkennen</span>
+                        </a>
                         {% if request.user.profile.permission == 1 %}
                         <a href="/setup/" class="flex items-center px-4 md:px-6 py-3 text-gray-900 hover:bg-gray-200 hover:text-black rounded-lg">
                             <span class="material-icons">check_circle</span>
@@ -63,12 +67,13 @@
                             <span class="material-icons">settings</span>
                             <span class="ml-2 md:ml-3 text-sm md:text-lg">Settings</span>
                         </a>
+
                     </ul>
                 </nav>
             </aside>
     
             <!-- Main Content -->
-            <main id="main-content" class="flex-1 bg-gray-100 p-4 overflow-y-auto transition-all duration-300 ml-0">
+            <main id="main-content" class="flex-1 bg-gray-100 p-4  overflow-y-auto transition-all duration-300 ml-0">
                 {% block content %}{% endblock %}
             </main>
         </div>

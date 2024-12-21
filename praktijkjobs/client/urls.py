@@ -5,6 +5,7 @@ from .views.home import *
 from .views.dashboard import *
 from .views.settings import *
 from .views.setup import *
+from .views.discovery import *
 
 
 urlpatterns = [
@@ -15,6 +16,7 @@ urlpatterns = [
     path('setup/', setup, name="setup"),
 
     path('dashboard/view/<int:id>/', view_post, name='view_post'),
+    path('discovery/', discovery, name="discovery"),
 
     path('dashboard/edit/<int:post_id>/', update_post, name='update_post'),
     path('create_post/', create_post, name="create_post"),
