@@ -6,10 +6,19 @@ from .views.dashboard import *
 from .views.settings import *
 from .views.setup import *
 from .views.discovery import *
+from .views.invoices import * 
+from .views.onlineData import * 
 
 
 urlpatterns = [
     path('', dashboard, name='home'),    
+
+    path('upload/', upload_file, name='upload_file'),    
+
+
+    path('invoices/', invoices, name="invoices"),
+    path('create_invoice/', create_invoice, name="create_invoice"),
+
 
     path('dashboard/', dashboard, name="dashboard"),
     path('settings/', settings, name="settings"),

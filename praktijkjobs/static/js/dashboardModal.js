@@ -19,3 +19,6 @@
            modal.classList.add('hidden'); // Hide modal when clicked outside
        }
    });
+
+
+

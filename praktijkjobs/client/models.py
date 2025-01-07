@@ -47,5 +47,19 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
+class Invoice(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='invoices')
+    title = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"Invoice {self.id}: {self.title}"
+
+class InvoiceItem(models.Model):
+    invoice = models.ForeignKey(Invoice, on_delete=models.CASCADE, related_name='items')
+    description = models.TextField()
+    amount = models.DecimalField(max_digits=10, decimal_places=2) 
+
 
 

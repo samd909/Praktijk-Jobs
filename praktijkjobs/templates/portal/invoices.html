@@ -1,0 +1,102 @@
+{% extends 'layouts/portal.html' %}
+{% block content %}
+{% load static %}
+<div class="text-gray-800 flex items-center gap-2 mb-4">
+    <span class="material-icons">home</span>
+    <p>Home / Facturen</p>
+</div>
+<h2 class="text-xl sm:text-2xl md:text-4xl font-bold mb-6">Facturen</h2>
+
+<div class="w-full h-[85%] flex flex-col sm:flex-row justify-between gap-6">
+
+    <!-- Invoice Management Section -->
+    <div class="bg-white w-full h-full p-8 text-black border border-gray-300 rounded-lg shadow-md overflow-auto">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-lg font-semibold">Invoices</h3>
+            <button onclick="openModal()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Create Invoice</button>
+        </div>
+        
+        <table class="w-full text-left border-collapse">
+            <thead>
+                <tr class="bg-gray-100 border-b">
+                    <th class="p-4">#</th>
+                    <th class="p-4">Title</th>
+                    <th class="p-4">Created By</th>
+                    <th class="p-4">Created At</th>
+                    <th class="p-4">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for invoice in invoices %}
+                <tr class="border-b hover:bg-gray-50">
+                    <td class="p-4">{{ invoice.id }}</td>
+                    <td class="p-4">{{ invoice.title }}</td>
+                    <td class="p-4">{{ invoice.created_by.username }}</td>
+                    <td class="p-4">{{ invoice.created_at }}</td>
+                    <td class="p-4 flex gap-2">
+                        <a href="#" class="text-blue-500 hover:underline">Edit</a>
+                        <a href="#" class="text-red-500 hover:underline">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="p-4 text-center text-gray-500">No invoices found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<!-- Modal -->
+<div id="invoiceModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div class="bg-white w-full max-w-2xl p-6 rounded-lg shadow-lg">
+        <h3 class="text-lg font-semibold mb-4">Create Invoice</h3>
+        <form id="invoiceForm" action="{% url 'create_invoice' %}" method="POST" class="space-y-4">
+            {% csrf_token %}
+            <div>
+                <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+                <input type="text" id="title" name="title" required
+                    class="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+            </div>
+            <div id="itemsContainer" class="space-y-2">
+                <div class="flex gap-2">
+                    <input type="text" name="descriptions[]" placeholder="Description" required
+                        class="block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                    <input type="number" name="amounts[]" placeholder="Amount" required
+                        class="block w-1/3 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                </div>
+            </div>
+            <button type="button" onclick="addItem()" class="text-blue-500 hover:underline">+ Add Item</button>
+            <div class="flex justify-end gap-4 mt-4">
+                <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">Cancel</button>
+                <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function openModal() {
+        document.getElementById('invoiceModal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+        document.getElementById('invoiceModal').classList.add('hidden');
+    }
+
+    function addItem() {
+        const container = document.getElementById('itemsContainer');
+        const newItem = document.createElement('div');
+        newItem.classList.add('flex', 'gap-2', 'mt-2');
+        newItem.innerHTML = `
+            <input type="text" name="descriptions[]" placeholder="Description" required
+                class="block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+            <input type="number" name="amounts[]" placeholder="Amount" required
+                class="block w-1/3 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+        `;
+        container.appendChild(newItem);
+    }
+</script>
+{% endblock %}
